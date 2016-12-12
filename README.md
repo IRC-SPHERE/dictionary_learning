@@ -20,9 +20,9 @@ to disable the virtual environment type the following into the command line:
 
     source deactivate dictionary_learning
 
-# Sample usage
+# Sample Usage
 
-The following code generates a simple dataset of a slow and fast sine wave. The SPAMS transformer then learns dictionary bases from this dataset. In this case the resulting bases consist of fast and slow sine waves, as expected.
+The following code generates a simple dataset of a "slow" and "fast" sine wave. The SPAMS transformer then learns dictionary bases from this dataset. In this case the resulting bases consist of fast and slow sine waves, as expected.
 
     import matplotlib.pyplot as pl
     import seaborn as sns
@@ -31,28 +31,41 @@ The following code generates a simple dataset of a slow and fast sine wave. The 
 
     sns.set_style('darkgrid')
     sns.set_context('poster')
-
+    
     rng = np.random.RandomState(123)
-
+    
     D = 51
     N = 1000
-
+    
+    # Generate the data
     t = np.linspace(-np.pi * 2, np.pi * 2, D)
     x = np.asarray(
         [np.sin(t * (1 + rng.choice(2, 1))) + rng.normal(0, 0.125, size=D) for _ in xrange(N)]
     )
-
+    
+    # Fit the model
     dl = SpamsTransformer(
         total_num_bases=10,
         l1_dictionary=1.0 / np.sqrt(D),
-        l1_reconstruct=1.0 / np.sqrt(D),
-    )
-
+        l1_reconstruct=1.0 / np.sqrt(D))
     dl.fit(x)
-
+    
+    # Plot the data and the learnt bases
     fig, axes = pl.subplots(2, 1, sharex=True)
-
-    axes[0].plot(x.T)
-    axes[1].plot(dl.dictionary)
-
+    
+    axes[0].plot(t, x.T)
+    axes[0].set_ylabel('Original data')
+    
+    axes[1].plot(t, dl.dictionary)
+    axes[1].set_ylabel('Learnt dictionary')
+    
+    # Reconstruct the data and plot the datapoint and its reconstruction
+    alphas = dl.transform(x)  # Compute the reconstruction coefficients
+    x_hat = dl.inverse_transform(alphas)  # Reconstruct the original data
+    
+    fig, ax = pl.subplots(1, 1, sharex=True, sharey=True)
+    ax.plot(t, x[0], label='Original data')
+    ax.plot(t, x_hat[0], label='Reconstructed data')
+    pl.legend()
+    
     pl.show()
