@@ -34,32 +34,33 @@ The following code generates a simple dataset of a "slow" and "fast" sine wave. 
     
     rng = np.random.RandomState(123)
     
-    D = 51
-    N = 1000
-    
+    D = 21
+    N = 50
+
     # Generate the data
     t = np.linspace(-np.pi * 2, np.pi * 2, D)
+    y = np.asarray([rng.choice(2, 1) for _ in xrange(N)])
     x = np.asarray(
-        [np.sin(t * (1 + rng.choice(2, 1))) + rng.normal(0, 0.125, size=D) for _ in xrange(N)]
+        [np.sin(t * (1 + y[n]) + rng.normal(0, 0.125, size=D)) for n in xrange(N)]
     )
-    
+
     # Fit the model
     dl = SpamsTransformer(
         total_num_bases=10,
-        l1_dictionary=1.0 / np.sqrt(D),
-        l1_reconstruct=1.0 / np.sqrt(D))
+        l1_dictionary=1.2 / np.sqrt(D),
+        l1_reconstruct=1.2 / np.sqrt(D))
     dl.fit(x)
-    
+
     # Plot the data and the learnt bases
     fig, axes = pl.subplots(2, 1, sharex=True)
-    
+
     axes[0].plot(t, x.T)
     axes[0].set_ylabel('Original data')
-    
+
     axes[1].plot(t, dl.dictionary)
     axes[1].set_ylabel('Learnt dictionary')
-    
-    # Reconstruct the data and plot the datapoint and its reconstruction
+
+    # Reconstruct the data and plot the first datapoint and its reconstruction
     alphas = dl.transform(x)  # Compute the reconstruction coefficients
     x_hat = dl.inverse_transform(alphas)  # Reconstruct the original data
     
@@ -69,3 +70,4 @@ The following code generates a simple dataset of a "slow" and "fast" sine wave. 
     pl.legend()
     
     pl.show()
+
