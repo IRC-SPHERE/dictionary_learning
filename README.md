@@ -18,6 +18,8 @@ For a BibTeX reference:
         month={Sept}
     }
 
+Note that whilst this software is released under that [MIT license](https://opensource.org/licenses/MIT), SPAMS is released under the [GPLv3](http://www.gnu.org/licenses/gpl.html).
+
 # Installation
 
 I have found that SPAMS has been tricky to install in the past. The simplest and most consistent way of installing it for me has been to rely on [anaconda python](https://www.continuum.io/downloads). The following three commands create a virtual environment called `dictionary_learning` and installs `python-spams` to it:
