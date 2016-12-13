@@ -1,7 +1,24 @@
+# Introduction
 
-# Dictionary Learning
+This is a loose wrapper of dictionary learning around the [SPArse Modeling Software](http://spams-devel.gforge.inria.fr/) (SPAMS) library and was used to generate the baseline models in "BDL.NET: Bayesian dictionary learning in Infer.NET" which was presented at the international workshop on machine learning for signal processing in 2016. The article can be found on [IEEExplore](http://ieeexplore.ieee.org/document/7738851/) or [Research Gate](https://www.researchgate.net/publication/308986489_BDLNET_Bayesian_dictionary_learning_in_InferNET).
 
-This is a loose wrapper of dictionary learning around the [SPArse Modeling Software](http://spams-devel.gforge.inria.fr/) (SPAMS) library.
+If using this code please cite the paper:
+
+> Diethe, Tom, Niall Twomey, and Peter Flach. "BDL. NET: Bayesian dictionary learning in Infer. NET." Machine Learning for Signal Processing (MLSP), 2016 IEEE 26th International Workshop on. IEEE, 2016.
+
+For a BibTeX reference:
+
+    @INPROCEEDINGS{diethe2016bdl,
+        author={T. Diethe and N. Twomey and P. Flach},
+        booktitle={2016 IEEE 26th International Workshop on Machine Learning for Signal Processing (MLSP)},
+        title={BDL.NET: Bayesian dictionary learning in Infer.NET},
+        year={2016},
+        pages={1-6},
+        doi={10.1109/MLSP.2016.7738851},
+        month={Sept}
+    }
+
+# Installation
 
 I have found that SPAMS has been tricky to install in the past. The simplest and most consistent way of installing it for me has been to rely on [anaconda python](https://www.continuum.io/downloads). The following three commands create a virtual environment called `dictionary_learning` and installs `python-spams` to it:
 
@@ -20,7 +37,7 @@ to disable the virtual environment type the following into the command line:
 
     source deactivate dictionary_learning
 
-# Sample Usage
+# Sample Code Usage
 
 The following code generates a simple dataset of a "slow" and "fast" sine wave. The SPAMS transformer then learns dictionary bases from this dataset. In this case the resulting bases consist of fast and slow sine waves, as expected.
 
