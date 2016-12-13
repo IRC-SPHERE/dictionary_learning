@@ -18,7 +18,7 @@ For a BibTeX reference:
         month={Sept}
     }
 
-Note that whilst this software is released under that [MIT license](https://opensource.org/licenses/MIT), SPAMS is released under the [GPLv3](http://www.gnu.org/licenses/gpl.html).
+Note that whilst this software is released under the [MIT license](https://opensource.org/licenses/MIT), SPAMS is released under the [GPLv3](http://www.gnu.org/licenses/gpl.html).
 
 # Installation
 
